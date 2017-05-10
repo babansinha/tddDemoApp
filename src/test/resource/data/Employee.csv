@@ -1,0 +1,3 @@
+columnName, type, length, autoIncrement
+id, Integer, 10, true
+name, String, 20, false
