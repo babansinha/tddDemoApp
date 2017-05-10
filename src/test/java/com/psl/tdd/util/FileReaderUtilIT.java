@@ -2,8 +2,8 @@ package com.psl.tdd.util;
 
 import org.junit.Test;
 
-import static com.jayway.restassured.RestAssured.*;
-import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
+//import static com.jayway.restassured.RestAssured.*;
+//import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -11,6 +11,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
+
+import static org.mockito.Mockito.*;
 
 public class FileReaderUtilIT {
 	@Test

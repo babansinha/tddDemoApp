@@ -1,8 +1,13 @@
 package com.psl.tdd.util;
 
+import org.junit.Test;
+
 public class CsvToTableConverterTest {
 	
-	public void testValidFile(){}
+	@Test
+	public void testValidFile() {
+		
+	}
 	
 	public void testValidTableName(){}
 	public void testValidColumn(){}

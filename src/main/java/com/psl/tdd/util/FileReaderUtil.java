@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FileReaderUtil {
 	
-	public List<String> getFilepathFromSchemas() {
+	public static List<String> getFilepathFromSchemas() {
 
 		List<String> fileList = new ArrayList<String>();
 
@@ -24,7 +24,7 @@ public class FileReaderUtil {
 		return fileList.size()==0 ? null : fileList;
 	}
 
-	private String getFileExtension(String fileName) {
+	private static String getFileExtension(String fileName) {
 		
 		String extension = null;
 		int i = fileName.lastIndexOf('.');
