@@ -6,11 +6,11 @@ import java.util.List;
 
 public class FileReaderUtil {
 	
-	public static List<String> getFilepathFromSchemas() {
+	public static List<String> getSchemaFileListFromSchemasFolder(String path) {
 
 		List<String> fileList = new ArrayList<String>();
 
-		File folder = new File(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
+		File folder = new File(path);
 		if ( !folder.exists() ) {
 			System.out.println("Error : Folder doesn't exist!!");
 		} else {
@@ -35,7 +35,7 @@ public class FileReaderUtil {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new FileReaderUtil().getFilepathFromSchemas());
+		System.out.println(getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH));
 	}
 
 }
