@@ -60,16 +60,16 @@ public class FileReaderUtilIT extends BaseTest {
 		//assertThat(files.isEmpty(), is(false));
 		//assertThat(files, hasSize(equalTo(1)));
 		
-		// to test wether the file has data or not
+		// to test whether the file has data or not
 		thrown.expect(ReaderException.class);
 		thrown.expectMessage(MessageConstant.EMPTY_FILE);
-		FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
+		//FileReaderUtil.isValidFile("FilePath");
 	}
 	
 	@Test
 	public void testReadFilesFromDirectory() {
 		System.out.println("testReadFilesFromDirectory. . .");
-		//Combination of all above test cases
+		// Combination of all above test cases
 	}
 	
 }
