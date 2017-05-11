@@ -1,42 +1,23 @@
 package com.psl.tdd.util;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
+import com.psl.tdd.constants.ConstantsUtil;
 import com.psl.tdd.constants.MessageConstant;
 import com.psl.tdd.exception.ReaderException;
 import com.psl.tdd.test.BaseTest;
 
-//import static com.jayway.restassured.RestAssured.*;
-//import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
-import static org.hamcrest.Matchers.*;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.equalTo;
-
-import java.util.List;
-
-import static org.mockito.Mockito.*;
-
 public class FileReaderUtilIT extends BaseTest {
-	/*@Test
-	public void firstEchoTest() {
-		//get("/echo/hello").then().assertThat().body("message", equalTo("hello"));
-		//get("/echo/hello").then().assertThat().body("message", equalTo("hello"));
-	}*/
-	
-	@Before
-	public void init() {
-		System.out.println("Init. . .");
+	@BeforeClass
+	public void setup(){
+		// need to create all type of folders that can be used along with files.
 	}
 	
-	@After
-	public void desptroy() {
-		System.out.println("desptroy. . .");
+	@AfterClass
+	public void teardown(){
+		// need to create all type of folders that can be used along with files.
 	}
 	
 	
