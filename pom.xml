@@ -32,12 +32,18 @@
         </dependency>
         <!-- end::tests[] -->
         <!-- after spring-boot-starter-web -->
-	  <dependency>
+	  <!-- dependency>
 	     <groupId>com.jayway.restassured</groupId>
 	     <artifactId>rest-assured</artifactId>
 	     <version>2.9.0</version>
 	     <scope>test</scope>
-	  </dependency>
+	  </dependency-->
+	  
+		 <dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>3.9</version>
+		 </dependency>
     </dependencies>
 
     <properties>

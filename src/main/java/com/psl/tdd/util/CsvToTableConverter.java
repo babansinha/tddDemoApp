@@ -3,10 +3,12 @@ package com.psl.tdd.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,27 +24,33 @@ import com.psl.tdd.modal.Table;
 
 public class CsvToTableConverter {
 
-	public static Map<Integer, String> getMapFromCSVString(String csvString) {
-        AtomicInteger integer = new AtomicInteger();
-        return Arrays.stream(csvString.split(","))
-                .collect(Collectors.toMap(splittedStr -> integer.getAndAdd(1), splittedStr -> splittedStr));
-    }
-	
 	
 	public static Map<String, Table> getTablesMap(String directoryPath) {
 		
-		//String csvFile = "/Users/mkyong/csv/country3.csv";
-		List<String> filesPath =  FileReaderUtil.getFilepathFromSchemas();
-		//csvFile = filesPath.get(0);
+		List<String> filesPath =  FileReaderUtil.getSchemaFileListFromSchemasFolder(directoryPath);
 
 		Map<String, Table> map = new HashMap<>();
-        	
-    	for (String csvFile : filesPath) {
-    		Table table = convertCsvToTable(csvFile);
-    		map.put(table.getTableName(), table);
-		}
+        
            
+    	/*Map<String, Table> collect = filesPath.stream()
+    			.
+    			.collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));*/
+    	filesPath.forEach(csvFile -> {
+    		try {
+					Table table = CsvToTableConverter.convertCsvToTable(csvFile);
+					map.put(table.getTableName(), table);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	});
+    	
+    	/*filesPath.stream()
+    	.filter(csvFile -> !"mkyong".equals(csvFile))
+    	.forEach(CsvToTableConverter::convertCsvToTable)
+    	;*/
 
+    	
 		return map;
 	}
 	
@@ -50,6 +58,7 @@ public class CsvToTableConverter {
 		CSVReader reader = null;
 		File file = null;
 		Set<Column> columns = new HashSet<>();
+		List<String> errorMessages = new ArrayList<>();
 		
 		try {
 				String[] line;
@@ -57,16 +66,20 @@ public class CsvToTableConverter {
 				reader = new CSVReader(new FileReader(filePath));
 				reader.readNext();
 				while ((line = reader.readNext()) != null) {
-					Column column = new Column();
-					column.setColumnName(line[0]);
-					column.setType(line[1]);
-					column.setLength(Integer.parseInt(line[2].trim()));
-					column.setAutoIncrement(Boolean.getBoolean(line[3]));
-					columns.add(column);
-					
-					System.out.println("Table : " + file.getName().subSequence(0, file.getName().indexOf("."))
-							+ " : Column [columnName= " + line[0] + ", type= " + line[1] + " , length=" + line[2]
-							+ " , autoIncrement=" + line[3] + "]");
+					if (isValidColumn(line)) {
+						Column column = new Column();
+						column.setColumnName(line[0]);
+						column.setType(line[1]);
+						column.setLength(Integer.parseInt(line[2].trim()));
+						column.setAutoIncrement(Boolean.getBoolean(line[3]));
+						columns.add(column);
+						
+						System.out.println("Table : " + file.getName().subSequence(0, file.getName().indexOf("."))
+								+ " : Column [columnName= " + line[0] + ", type= " + line[1] + " , length=" + line[2]
+								+ " , autoIncrement=" + line[3] + "]");
+					} else {
+						errorMessages.add(Arrays.toString(line) + " -> is Invalid!!");
+					}
 				}
 
 		} catch (IOException e) {
@@ -85,16 +98,36 @@ public class CsvToTableConverter {
 		return table;
 	}
 	
-	public static boolean isValidCsvFile(String filePath) {
-		
+	
+	private static boolean isValidColumn(String[] line) {
+		for (int i = 0; i < line.length; i++) {
+			switch (i) {
+			case 0:
+				String columnName = line[i].trim();
+				if (columnName.isEmpty() || columnName.length() < 1) {
+					return false;
+				}
+				break;
+			case 1:
+				String type = line[i].trim();
+				//type.matches("-?\\d+(\\.\\d+)?") 
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			}
+		}
 		
 		return true;
 	}
-	
+
 	public static void main(String[] args) throws IOException {
-		List<String> files = FileReaderUtil.getFilepathFromSchemas();
+		List<String> files = FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 		System.out.println("files :: " + files);
-		System.out.println(getTablesMap(""));		
+		System.out.println(getTablesMap(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH));		
 		
 	}
 
