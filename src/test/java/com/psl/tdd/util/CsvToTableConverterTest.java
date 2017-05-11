@@ -25,14 +25,6 @@ public class CsvToTableConverterTest extends BaseTest {
 		// need to create all type of folders that can be used along with files.
 	}
 	
-	@Test
-	public void testValidFile() {
-		// to test wether the file has data or not
-		
-		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstant.EMPTY_FILE);
-		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
-	}
 	
 	@Test
 	public void testValidTableName(){

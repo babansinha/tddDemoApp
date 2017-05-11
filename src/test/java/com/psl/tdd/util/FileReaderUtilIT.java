@@ -41,13 +41,17 @@ public class FileReaderUtilIT extends BaseTest {
 	@Test
 	public void testIsDirectoryExistWithValidPath() {
 		System.out.println("testIsDirectoryExistWithValidPath. . .");
-		//assertThat(FileReaderUtil.isValidDirectory("directoryPath"), is(false));
+		//assertThat(FileReaderUtil.isValidDirectory(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH), is(false));
 	}
 	
 	@Test
 	public void testIsFileExist() {
 		System.out.println("testIsFileExist. . .");
+		thrown.expect(ReaderException.class);
+		thrown.expectMessage(MessageConstant.EMPTY_FILE);
+		FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
+	
 	
 	@Test
 	public void testIsValidFile() {
@@ -55,6 +59,11 @@ public class FileReaderUtilIT extends BaseTest {
 		//1. True or False is expected
 		//assertThat(files.isEmpty(), is(false));
 		//assertThat(files, hasSize(equalTo(1)));
+		
+		// to test wether the file has data or not
+		thrown.expect(ReaderException.class);
+		thrown.expectMessage(MessageConstant.EMPTY_FILE);
+		FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
 	@Test
