@@ -1,17 +1,17 @@
 package com.psl.tdd.util;
 
-import com.psl.tdd.exception.ReaderException;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-public class CsvToTableConverterTest {
+import com.psl.tdd.constants.ConstantsUtil;
+import com.psl.tdd.constants.MessageConstant;
+import com.psl.tdd.exception.ReaderException;
+import com.psl.tdd.test.BaseTest;
+
+public class CsvToTableConverterTest extends BaseTest {
 	
-	@Rule
-    public ExpectedException thrown= ExpectedException.none();
 	
 	@Rule
 	
@@ -30,7 +30,7 @@ public class CsvToTableConverterTest {
 		// to test wether the file has data or not
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.EMPTY_FILE);
+		thrown.expectMessage(MessageConstant.EMPTY_FILE);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -40,7 +40,7 @@ public class CsvToTableConverterTest {
 		// to test table name has start from number
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -49,7 +49,7 @@ public class CsvToTableConverterTest {
 		// check the headers for the table are in the set only like {columnName, type, length, autoincrement, constraints} Anything else would fail the testcase.
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_HEADERS_LIST);
+		thrown.expectMessage(MessageConstant.INVALID_HEADERS_LIST);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -60,7 +60,7 @@ public class CsvToTableConverterTest {
 		// input may be list of size = 0
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -69,7 +69,7 @@ public class CsvToTableConverterTest {
 		// to test by passing valid input, output would be correct
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -78,7 +78,7 @@ public class CsvToTableConverterTest {
 		// to vaildate the file with no columnheaders
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 		
 	}
@@ -88,7 +88,7 @@ public class CsvToTableConverterTest {
 		//to test the column with the number not more than 5 
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -97,7 +97,7 @@ public class CsvToTableConverterTest {
 		//test the file with one row only
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -107,7 +107,7 @@ public class CsvToTableConverterTest {
 		// test should pass with the default value
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -117,7 +117,7 @@ public class CsvToTableConverterTest {
 		// test should pass with the default value
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -127,7 +127,7 @@ public class CsvToTableConverterTest {
 		// test should pass with the default value
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -137,7 +137,7 @@ public class CsvToTableConverterTest {
 		// test should pass with the default value
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 	
@@ -146,7 +146,7 @@ public class CsvToTableConverterTest {
 		// test should pass
 		
 		thrown.expect(ReaderException.class);
-		thrown.expectMessage(MessageConstants.INVALID_TABLE_NAME);
+		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
 
