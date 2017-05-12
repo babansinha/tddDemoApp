@@ -18,6 +18,14 @@ import java.util.ArrayList;
 
 public class CsvToTableConverterTest extends BaseTest {
 	
+	/**
+	 * This method is responsible to verify valid table name
+	 *  - will test table name has no special characters which are not allowed like -,. 
+	 *  - will test table name has start from number
+	 * 
+	 * @throws IOException
+	 * @throws ReaderException
+	 */
 	@Test
 	public void testValidTableName() throws IOException, ReaderException {
 		// to test table name has no special characters which are not allowed like -,. 
@@ -28,6 +36,13 @@ public class CsvToTableConverterTest extends BaseTest {
 		CsvToTableConverter.convertCsvToTable(file.getAbsolutePath());
 	}
 	
+	/**
+	 * To test the input for the method is not ArrayList<String> with size >0
+	 *  - input may be null
+	 *  - input may be list of size = 0
+	 *  
+	 * @throws ReaderException
+	 */
 	@Test
 	public void testForInvalidInput() throws ReaderException{
 		// to test the input for the method is not ArrayList<String> with size >0
@@ -40,6 +55,11 @@ public class CsvToTableConverterTest extends BaseTest {
 		CsvToTableConverter.convertCsvToTable("");
 	}
 	
+	/**
+	 * To test by passing valid input, output would be correct
+	 * 
+	 * @throws ReaderException
+	 */
 	@Test
 	public void testForValidInput() throws ReaderException {
 		// to test by passing valid input, output would be correct
@@ -48,6 +68,11 @@ public class CsvToTableConverterTest extends BaseTest {
 		assertTrue(table!=null && !"".equals(table.getTableName().trim()));
 	}
 	
+	/**
+	 * Test the file with one row only i.e. header
+	 * 
+	 * @throws ReaderException
+	 */
 	@Test
 	public void testTableWithHeaderOnly() throws ReaderException{
 		//test the file with one row only
@@ -58,6 +83,12 @@ public class CsvToTableConverterTest extends BaseTest {
 	}
 	
 
+	/**
+	 * Check the headers for the table are in the set only like {columnName, type, length, autoincrement, constraints}
+	 * Anything else would fail the testcase.
+	 * 
+	 * @throws ReaderException
+	 */
 	@Test
 	public void testForValidInputToGetValidOutput() throws ReaderException{
 		// check the headers for the table are in the set only like {columnName, type, length, autoincrement, constraints} 
