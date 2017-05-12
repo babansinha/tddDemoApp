@@ -12,8 +12,20 @@ import com.psl.tdd.constants.ConstantsUtil;
 import com.psl.tdd.constants.MessageConstant;
 import com.psl.tdd.exception.ReaderException;
 
+/**
+ * This class will deal Files related util functionalities
+ *
+ */
 public class FileReaderUtil {
 	
+	/**
+	 * 
+	 * This method is responsible to fetch and return all files of a given directory path
+	 * 
+	 * @param directoryPath
+	 * @return List of file path
+	 * @throws ReaderException
+	 */
 	public static List<String> getSchemaFileListFromSchemasFolder(String directoryPath) throws ReaderException {
 
 		if(directoryPath==null) {
@@ -46,6 +58,13 @@ public class FileReaderUtil {
 		return fileList;
 	}
 	
+	/**
+	 * This function is responsible to test whether given file is valid or not
+	 * 
+	 * @param file
+	 * @return boolean
+	 * @throws ReaderException
+	 */
 	public static boolean isValidFile(final File file) throws ReaderException {
 		
 		BufferedReader br = null;
@@ -62,7 +81,7 @@ public class FileReaderUtil {
 			throw new ReaderException(MessageConstant.IO_EXCEPTION);
 		} finally {
 			try {
-				if(br!=null){
+				if(br!=null) {
 					br.close();
 				}
 			} catch (IOException e) {
