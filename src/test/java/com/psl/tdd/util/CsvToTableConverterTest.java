@@ -1,42 +1,34 @@
 package com.psl.tdd.util;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import com.psl.tdd.constants.ConstantsUtil;
 import com.psl.tdd.constants.MessageConstant;
 import com.psl.tdd.exception.ReaderException;
 import com.psl.tdd.test.BaseTest;
 
+import java.io.File;
+import java.io.IOException;
+
 public class CsvToTableConverterTest extends BaseTest {
 	
 	
 	@Rule
-	
-	@BeforeClass
-	public void setup(){
-		// need to create all type of folders that can be used along with files.
-	}
-	
-	@AfterClass
-	public void teardown(){
-		// need to create all type of folders that can be used along with files.
-	}
-	
+	public TemporaryFolder testFolder = new TemporaryFolder();
 	
 	@Test
-	public void testValidTableName(){
+	public void testValidTableName() throws IOException {
 		// to test table name has no special characters which are not allowed like -,. 
 		// to test table name has start from number
-		
+		File file = testFolder.newFile("123A-B.csv");
 		thrown.expect(ReaderException.class);
 		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
-		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
+		CsvToTableConverter.convertCsvToTable(file.getAbsolutePath());
 	}
 	
-	@Test
+	/*@Test
 	public void testValidColumn(){
 		// check the headers for the table are in the set only like {columnName, type, length, autoincrement, constraints} Anything else would fail the testcase.
 		
@@ -141,5 +133,5 @@ public class CsvToTableConverterTest extends BaseTest {
 		thrown.expectMessage(MessageConstant.INVALID_TABLE_NAME);
 		CsvToTableConverter.convertCsvToTable(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 	}
-
+*/
 }

@@ -20,13 +20,14 @@ import java.util.stream.Collectors;
 
 import com.opencsv.CSVReader;
 import com.psl.tdd.constants.ConstantsUtil;
+import com.psl.tdd.exception.ReaderException;
 import com.psl.tdd.modal.Column;
 import com.psl.tdd.modal.Table;
 
 public class CsvToTableConverter {
 
 	
-	public static Map<String, Table> getTablesMap(String directoryPath) {
+	public static Map<String, Table> getTablesMap(String directoryPath) throws ReaderException {
 		
 		List<String> filesPath =  FileReaderUtil.getSchemaFileListFromSchemasFolder(directoryPath);
 
@@ -85,6 +86,12 @@ public class CsvToTableConverter {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		Table table = new Table();
@@ -125,7 +132,7 @@ public class CsvToTableConverter {
 		return true;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ReaderException {
 		List<String> files = FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
 		System.out.println("files :: " + files);
 		System.out.println(getTablesMap(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH));		
