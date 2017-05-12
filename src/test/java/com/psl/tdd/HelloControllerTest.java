@@ -1,5 +1,7 @@
 package com.psl.tdd;
 
+//TODO remove commented code
+/*
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,3 +31,4 @@ public class HelloControllerTest {
                 .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
     }
 }
+*/
