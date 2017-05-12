@@ -14,10 +14,6 @@ import java.io.IOException;
 
 public class CsvToTableConverterTest extends BaseTest {
 	
-	
-	@Rule
-	public TemporaryFolder testFolder = new TemporaryFolder();
-	
 	@Test
 	public void testValidTableName() throws IOException {
 		// to test table name has no special characters which are not allowed like -,. 

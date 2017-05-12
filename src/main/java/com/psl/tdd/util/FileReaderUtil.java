@@ -28,31 +28,13 @@ public class FileReaderUtil {
 		} else {
 			for ( File file : folder.listFiles() ) {
 				if ( file.isFile() && "csv".equals( getFileExtension( file.getName() ))) {
-					
-					BufferedReader br = null;
-					
 					try {
-						br = new BufferedReader(new FileReader(file));
-						if (br.readLine()==null){
-							throw new ReaderException(MessageConstant.EMPTY_FILE);
+						if( isValidFile(file) ) {
+							fileList.add(file.getAbsolutePath());
 						}
-						
-						fileList.add(file.getAbsolutePath());
-						
-					} catch (FileNotFoundException e) {
-						throw new ReaderException(MessageConstant.FILE_NOT_FOUND);
-					} catch (IOException e) {
-						throw new ReaderException(MessageConstant.IO_EXCEPTION);
-					} finally {
-						try {
-							if(br!=null){
-								br.close();
-							}
-						} catch (IOException e) {
-							throw new ReaderException(MessageConstant.IO_EXCEPTION);
-						}
+					} catch (ReaderException re) {
+						System.out.println("Reader Exception"+re.getMessage());
 					}
-					
 				}
 			}
 			
@@ -61,7 +43,34 @@ public class FileReaderUtil {
 			}
 		}
 
-		return fileList.size()==0 ? null : fileList;
+		return fileList;
+	}
+	
+	public static boolean isValidFile(final File file) throws ReaderException {
+		
+		BufferedReader br = null;
+		
+		try {
+			br = new BufferedReader(new FileReader(file));
+			if (br.readLine()==null){
+				throw new ReaderException(MessageConstant.EMPTY_FILE);
+			}
+			
+		} catch (FileNotFoundException e) {
+			throw new ReaderException(MessageConstant.FILE_NOT_FOUND);
+		} catch (IOException e) {
+			throw new ReaderException(MessageConstant.IO_EXCEPTION);
+		} finally {
+			try {
+				if(br!=null){
+					br.close();
+				}
+			} catch (IOException e) {
+				throw new ReaderException(MessageConstant.IO_EXCEPTION);
+			}
+		}
+		
+		return true;
 	}
 
 	private static String getFileExtension(String fileName) {

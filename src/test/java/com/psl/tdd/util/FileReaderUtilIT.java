@@ -1,5 +1,7 @@
 package com.psl.tdd.util;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import com.psl.tdd.constants.ConstantsUtil;
@@ -7,12 +9,15 @@ import com.psl.tdd.constants.MessageConstant;
 import com.psl.tdd.exception.ReaderException;
 import com.psl.tdd.test.BaseTest;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 public class FileReaderUtilIT extends BaseTest {
 		
 	@Test
 	public void testNullDirectoryAsInput() throws ReaderException {
 		System.out.println("testNullDirectoryAsInput. . .");
-		//1. Exception is expected
 		thrown.expect(ReaderException.class);
         thrown.expectMessage(MessageConstant.INVALID_DIRECTORY_PATH);
         FileReaderUtil.getSchemaFileListFromSchemasFolder(null);
@@ -29,36 +34,34 @@ public class FileReaderUtilIT extends BaseTest {
 	@Test
 	public void testIsDirectoryExistWithValidPath() throws ReaderException {
 		System.out.println("testIsDirectoryExistWithValidPath. . .");
-		thrown.expect(ReaderException.class);
-        thrown.expectMessage(MessageConstant.INVALID_DIRECTORY_PATH);
-        FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.INVALID_SCHEMA_FOLDER_ABSOLUTE_PATH);
+		
+        List<String> list = FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
+        assertTrue(list.size()>0);
 	}
 	
 	@Test
-	public void testIsFileExist() throws ReaderException {
+	public void testIsFileExist() throws ReaderException, IOException {
 		System.out.println("testIsFileExist. . .");
 		thrown.expect(ReaderException.class);
 		thrown.expectMessage(MessageConstant.EMPTY_DIRECTORY);
-		FileReaderUtil.getSchemaFileListFromSchemasFolder(ConstantsUtil.SCHEMA_FOLDER_ABSOLUTE_PATH);
+		File folder = testFolder.newFolder("FileReader_EmptyFolder");
+		FileReaderUtil.getSchemaFileListFromSchemasFolder(folder.getAbsolutePath());
 	}
 	
 	
 	@Test
-	public void testIsValidFile() {
+	public void testIsValidFile() throws IOException, ReaderException {
 		System.out.println("testIsValidFile. . .");
-		//1. True or False is expected
-		//assertThat(files.isEmpty(), is(false));
-		//assertThat(files, hasSize(equalTo(1)));
-		
-		// to test whether the file has data or not
 		thrown.expect(ReaderException.class);
 		thrown.expectMessage(MessageConstant.EMPTY_FILE);
-		//FileReaderUtil.isValidFile("FilePath");
+		File emptyFile = testFolder.newFile("FileReader_EmptyFile");
+		FileReaderUtil.isValidFile(emptyFile);
+		
 	}
 	
-	@Test
+	/*@Test
 	public void testReadFilesFromDirectory() {
 		System.out.println("testReadFilesFromDirectory. . .");
 		// Combination of all above test cases
-	}
+	}*/
 }
